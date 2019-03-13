@@ -56,6 +56,34 @@ public class OfferItem {
     }
 
     /**
+     * @return the product
+     */
+    public ProductSnapshot getProduct() {
+        return product;
+    }
+
+    /**
+     * @return the quantity
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * @return the totalCost
+     */
+    public Money getTotalCost() {
+        return totalCost;
+    }
+
+    /**
+     * @return the discount
+     */
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    /**
      *
      * @param item
      * @param delta
@@ -115,6 +143,66 @@ public class OfferItem {
         BigDecimal acceptableDelta = max.multiply(BigDecimal.valueOf(delta / 100));
 
         return acceptableDelta.compareTo(difference) > 0;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (discount == null ? 0 : discount.hashCode());
+        result = prime * result + (product == null ? 0 : product.hashCode());
+        result = prime * result + quantity;
+        result = prime * result + (totalCost == null ? 0 : totalCost.hashCode());
+        return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        OfferItem other = (OfferItem) obj;
+        if (discount == null) {
+            if (other.discount != null) {
+                return false;
+            }
+        } else if (!discount.equals(other.discount)) {
+            return false;
+        }
+        if (product == null) {
+            if (other.product != null) {
+                return false;
+            }
+        } else if (!product.equals(other.product)) {
+            return false;
+        }
+        if (quantity != other.quantity) {
+            return false;
+        }
+        if (totalCost == null) {
+            if (other.totalCost != null) {
+                return false;
+            }
+        } else if (!totalCost.equals(other.totalCost)) {
+            return false;
+        }
+        return true;
     }
 
 }
